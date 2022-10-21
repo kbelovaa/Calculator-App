@@ -1,11 +1,14 @@
 function roundValue(value) {
   const dotIndex = value.indexOf('.');
-  const afterLastDigit = value.substr(dotIndex + 4, 1);
-  if (Number(afterLastDigit) >= 5) {
-    const lastDigit = value.substr(dotIndex + 3, 1);
-    return `${value.slice(0, dotIndex + 3)}${Number(lastDigit) + 1}`;
+  if (dotIndex !== -1) {
+    const afterLastDigit = value.substr(dotIndex + 4, 1);
+    if (Number(afterLastDigit) >= 5) {
+      const lastDigit = value.substr(dotIndex + 3, 1);
+      return `${value.slice(0, dotIndex + 3)}${Number(lastDigit) + 1}`;
+    }
+    return value.slice(0, dotIndex + 4);
   }
-  return value.slice(0, dotIndex + 4);
+  return value;
 }
 
 function makeCorrectRealNumber(value) {

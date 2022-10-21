@@ -6,20 +6,13 @@ import StyledButton from './styled';
 export default class Button extends Component {
   constructor(props) {
     super(props);
-
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick() {
-    const argument = this.props.valueToUse ?? this.props.value;
-    this.props.onClick(argument);
   }
 
   static contextType = Context;
 
   render() {
     return (
-      <StyledButton selectedTheme={this.context.onGetTheme} onClick={this.handleClick}>
+      <StyledButton selectedTheme={this.context.onGetTheme} onClick={() => this.props.onClick(this.props.value)}>
         {this.props.value}
       </StyledButton>
     );
@@ -27,7 +20,6 @@ export default class Button extends Component {
 }
 
 Button.propTypes = {
-  valueToUse: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   onClick: PropTypes.func,
   theme: PropTypes.object,

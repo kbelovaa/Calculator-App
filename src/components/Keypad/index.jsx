@@ -28,7 +28,7 @@ export default class Keypad extends Component {
           <Button value="0" onClick={this.props.onEnter} />
         </Flex>
         <Flex direction="column" justify="end">
-          <Button value="%" valueToUse={this.props.currentValue} onClick={this.props.onRemainder} />
+          <Button value="%" onClick={this.props.onExecuteCommand} />
           <Button value="9" onClick={this.props.onEnter} />
           <Button value="6" onClick={this.props.onEnter} />
           <Button value="3" onClick={this.props.onEnter} />
@@ -36,11 +36,11 @@ export default class Keypad extends Component {
         </Flex>
         <Flex direction="column">
           <Button value={<FontAwesomeIcon icon={faDeleteLeft} />} onClick={this.props.onDelete} />
-          <Button value="/" valueToUse={this.props.currentValue} onClick={this.props.onDivide} />
-          <Button value="*" valueToUse={this.props.currentValue} onClick={this.props.onMultiply} />
-          <Button value="-" valueToUse={this.props.currentValue} onClick={this.props.onSubstract} />
-          <Button value="+" valueToUse={this.props.currentValue} onClick={this.props.onAdd} />
-          <Button value="=" valueToUse={this.props.currentValue} onClick={this.props.onCalculate} />
+          <Button value="/" onClick={this.props.onExecuteCommand} />
+          <Button value="*" onClick={this.props.onExecuteCommand} />
+          <Button value="-" onClick={this.props.onExecuteCommand} />
+          <Button value="+" onClick={this.props.onExecuteCommand} />
+          <Button value="=" onClick={this.props.onExecuteCommand} />
         </Flex>
       </Flex>
     );
@@ -48,16 +48,10 @@ export default class Keypad extends Component {
 }
 
 Keypad.propTypes = {
-  currentValue: PropTypes.string,
   onEnter: PropTypes.func,
+  onExecuteCommand: PropTypes.func,
   onClearExpression: PropTypes.func,
   onChangeSign: PropTypes.func,
   onClearValue: PropTypes.func,
-  onRemainder: PropTypes.func,
   onDelete: PropTypes.func,
-  onDivide: PropTypes.func,
-  onMultiply: PropTypes.func,
-  onSubstract: PropTypes.func,
-  onAdd: PropTypes.func,
-  onCalculate: PropTypes.func,
 };

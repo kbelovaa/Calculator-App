@@ -3,34 +3,14 @@ import { roundValue, makeCorrectRealNumber } from './transformationFunctions';
 class CalculatorCore {
   constructor() {
     this.value = '';
-    this.expression = '';
-    this.commands = [];
   }
 
   executeCommand(command) {
-    if (this.commands.length === 0) {
-      this.value = command.value;
-    } else {
-      this.value = roundValue(String(this.commands[this.commands.length - 1].execute(command.value)));
-    }
-    this.expression = this.value + command.print();
-    this.commands.push(command);
-  }
-
-  calculate(value) {
-    this.expression = `${this.expression}${makeCorrectRealNumber(value)}=`;
-    this.value = roundValue(String(this.commands[this.commands.length - 1].execute(value)));
-    this.commands = [];
+    this.value = roundValue(String(command.execute(this.value)));
   }
 
   clearValue() {
     this.value = '';
-  }
-
-  clearInput() {
-    this.value = '';
-    this.expression = '';
-    this.commands = [];
   }
 }
 
@@ -40,11 +20,7 @@ class AddCommand {
   }
 
   execute(currentValue) {
-    return Number(this.value) + Number(currentValue);
-  }
-
-  print() {
-    return '+';
+    return Number(currentValue) + Number(this.value);
   }
 }
 
@@ -54,11 +30,7 @@ class SubtractCommand {
   }
 
   execute(currentValue) {
-    return Number(this.value) - Number(currentValue);
-  }
-
-  print() {
-    return '-';
+    return Number(currentValue) - Number(this.value);
   }
 }
 
@@ -68,11 +40,7 @@ class MultiplyCommand {
   }
 
   execute(currentValue) {
-    return Number(currentValue) * Number(this.value);
-  }
-
-  print() {
-    return '*';
+    return Number(this.value) * Number(currentValue);
   }
 }
 
@@ -82,11 +50,7 @@ class DivideCommand {
   }
 
   execute(currentValue) {
-    return Number(this.value) / Number(currentValue);
-  }
-
-  print() {
-    return '/';
+    return Number(currentValue) / Number(this.value);
   }
 }
 
@@ -96,11 +60,7 @@ class CalculateRemainderCommand {
   }
 
   execute(currentValue) {
-    return Number(this.value) % Number(currentValue);
-  }
-
-  print() {
-    return '%';
+    return Number(currentValue) % Number(this.value);
   }
 }
 
