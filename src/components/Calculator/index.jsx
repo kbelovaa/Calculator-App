@@ -52,7 +52,7 @@ export default class Calculator extends Component {
       );
     } else {
       if (this.state.commands.length > 0) {
-        this.context.onAddExpression(this.state.expression + this.state.value);
+        this.context.onAddExpression(`${this.state.expression}${Number(this.state.value)}`);
       }
       this.setState({ value: '', expression: calculator.value + command });
     }
