@@ -30,7 +30,7 @@ function ThemeSelector() {
   );
 }
 
-ThemeSelector.PropTypes = {
+ThemeSelector.propTypes = {
   theme: PropTypes.object,
   selectedTheme: PropTypes.string,
 };

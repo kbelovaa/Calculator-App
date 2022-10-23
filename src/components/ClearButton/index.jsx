@@ -19,7 +19,7 @@ function ClearButton() {
   );
 }
 
-ClearButton.PropTypes = {
+ClearButton.propTypes = {
   theme: PropTypes.object,
   selectedTheme: PropTypes.string,
 };
