@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Layout from 'Components/Layout';
 import Calculator from 'Components/Calculator';
 import Settings from 'Components/Settings';
+import ErrorBoundary from 'Components/ErrorBoundary';
 import Context from 'Utils/context';
 import { AppWrapper, GlobalStyle } from './styled';
 
@@ -14,27 +15,29 @@ export default class App extends Component {
 
   render() {
     return (
-      <Context.Provider
-        value={{
-          onShowHistory: this.props.onShowHistory,
-          onGetTheme: this.props.onGetTheme,
-          onAddExpression: this.props.onAddExpression,
-          onClearExpressions: this.props.onClearExpressions,
-        }}
-      >
-        <AppWrapper selectedTheme={this.props.onGetTheme}>
-          <GlobalStyle />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Layout />}>
-                <Route index element={<Calculator />} />
-                <Route path="settings" element={<Settings />} />
-              </Route>
-              <Route path="*" element={<Navigate to="/" />} />
-            </Routes>
-          </BrowserRouter>
-        </AppWrapper>
-      </Context.Provider>
+      <ErrorBoundary>
+        <Context.Provider
+          value={{
+            onShowHistory: this.props.onShowHistory,
+            onGetTheme: this.props.onGetTheme,
+            onAddExpression: this.props.onAddExpression,
+            onClearExpressions: this.props.onClearExpressions,
+          }}
+        >
+          <AppWrapper selectedTheme={this.props.onGetTheme}>
+            <GlobalStyle />
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Layout />}>
+                  <Route index element={<Calculator />} />
+                  <Route path="settings" element={<Settings />} />
+                </Route>
+                <Route path="*" element={<Navigate to="/" />} />
+              </Routes>
+            </BrowserRouter>
+          </AppWrapper>
+        </Context.Provider>
+      </ErrorBoundary>
     );
   }
 }

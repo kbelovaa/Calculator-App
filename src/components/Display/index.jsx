@@ -13,14 +13,15 @@ export default class Display extends Component {
   render() {
     return (
       <DisplayWrapper selectedTheme={this.context.onGetTheme}>
-        <ExpressionWrapper>{this.props.expression}</ExpressionWrapper>
-        <InputWrapper>{this.props.currentValue}</InputWrapper>
+        <ExpressionWrapper>{this.props.error ? '' : this.props.expression}</ExpressionWrapper>
+        <InputWrapper>{this.props.error ?? this.props.currentValue}</InputWrapper>
       </DisplayWrapper>
     );
   }
 }
 
 Display.propTypes = {
+  error: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   expression: PropTypes.string,
   currentValue: PropTypes.string,
   theme: PropTypes.object,

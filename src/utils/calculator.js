@@ -1,4 +1,4 @@
-import { roundValue, makeCorrectRealNumber } from './transformationFunctions';
+import { makeCorrectRealNumber } from './transformationFunctions';
 
 class CalculatorCore {
   constructor() {
@@ -6,7 +6,7 @@ class CalculatorCore {
   }
 
   executeCommand(command) {
-    this.value = roundValue(String(command.execute(this.value)));
+    this.value = String(command.execute(this.value));
   }
 
   clearValue() {

@@ -33,5 +33,4 @@ export default class Header extends Component {
 Header.propTypes = {
   theme: PropTypes.object,
   selectedtheme: PropTypes.string,
-  onGetTheme: PropTypes.string,
 };

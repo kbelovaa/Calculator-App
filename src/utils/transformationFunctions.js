@@ -1,12 +1,19 @@
-function roundValue(value) {
+function roundValue(value, numberOfDigits = 3) {
   const dotIndex = value.indexOf('.');
-  if (dotIndex !== -1) {
-    const afterLastDigit = value.substr(dotIndex + 4, 1);
-    if (Number(afterLastDigit) >= 5) {
-      const lastDigit = value.substr(dotIndex + 3, 1);
-      return `${value.slice(0, dotIndex + 3)}${Number(lastDigit) + 1}`;
+  const eIndex = value.indexOf('e');
+  if (dotIndex !== -1 && eIndex === -1 && value.substr(dotIndex + 1).length > numberOfDigits) {
+    const lastDigit = value.substr(dotIndex + numberOfDigits, 1);
+    const afterLastDigit = value.substr(dotIndex + numberOfDigits + 1, 1);
+    if (Number(afterLastDigit) >= 5 && Number(lastDigit) < 9) {
+      return `${value.slice(0, dotIndex + numberOfDigits)}${Number(lastDigit) + 1}`;
     }
-    return value.slice(0, dotIndex + 4);
+    if (Number(afterLastDigit) >= 5 && lastDigit === '9') {
+      if (numberOfDigits === 1) {
+        return Number(value.slice(0, dotIndex + numberOfDigits - 1)) + 1;
+      }
+      return roundValue(value, numberOfDigits - 1);
+    }
+    return value.slice(0, dotIndex + numberOfDigits + 1).replace(/.0*$/, '');
   }
   return value;
 }

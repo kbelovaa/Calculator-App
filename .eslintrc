@@ -26,6 +26,7 @@
         "componentWillUpdate",
         "componentDidUpdate",
         "componentWillUnmount",
+        "componentDidCatch",
         "print"
       ]
     }]

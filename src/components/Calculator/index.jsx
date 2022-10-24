@@ -13,6 +13,7 @@ import {
   CalculateRemainderCommand,
 } from 'Utils/calculator';
 import Context from 'Utils/context';
+import { roundValue, makeCorrectRealNumber } from 'Utils/transformationFunctions';
 
 const calculator = new CalculatorCore();
 
@@ -24,6 +25,7 @@ export default class Calculator extends Component {
       expression: '',
       commands: [],
       isHistoryOpen: true,
+      error: null,
     };
 
     this.updateInfo = this.updateInfo.bind(this);
@@ -38,11 +40,11 @@ export default class Calculator extends Component {
   }
 
   updateInfo(command) {
-    if (command === '=') {
+    if (command === '=' && this.state.commands.length > 0) {
       this.setState(
         (prevState) => ({
-          value: calculator.value,
-          expression: `${prevState.expression}${prevState.value}=`,
+          value: roundValue(calculator.value),
+          expression: `${prevState.expression}${Number(makeCorrectRealNumber(prevState.value))}=`,
           commands: [],
         }),
         () => {
@@ -50,43 +52,72 @@ export default class Calculator extends Component {
           calculator.clearValue();
         }
       );
+    } else if (command === '=' && this.state.commands.length === 0) {
+      this.handleClearExpression();
     } else {
       if (this.state.commands.length > 0) {
-        this.context.onAddExpression(`${this.state.expression}${Number(this.state.value)}`);
+        this.context.onAddExpression(`${this.state.expression}${Number(makeCorrectRealNumber(this.state.value))}`);
       }
       this.setState({ value: '', expression: calculator.value + command });
     }
   }
 
   handleEnterSymbol(value) {
+    if (this.state.error !== null) {
+      this.handleClearExpression();
+    }
+    if (value === '.' && this.state.value.indexOf('.') !== -1) {
+      return;
+    }
+    if (value === '0' && this.state.value.slice(0, 1) === '0' && this.state.value.indexOf('.') === -1) {
+      return;
+    }
+    if (value !== '.' && this.state.value === '0') {
+      this.setState({ value });
+      return;
+    }
     this.setState((prevState) => ({
       value: prevState.value + value,
     }));
   }
 
   handleExecuteCommand(command) {
+    if (this.state.error !== null) {
+      this.handleClearExpression();
+    }
     if (this.state.commands.length === 0) {
       calculator.executeCommand(new AddCommand(this.state.value));
     }
     if (this.state.commands.length > 0) {
-      switch (this.state.commands[this.state.commands.length - 1]) {
-        case '+':
-          calculator.executeCommand(new AddCommand(this.state.value));
-          break;
-        case '-':
-          calculator.executeCommand(new SubtractCommand(this.state.value));
-          break;
-        case '*':
-          calculator.executeCommand(new MultiplyCommand(this.state.value));
-          break;
-        case '/':
-          calculator.executeCommand(new DivideCommand(this.state.value));
-          break;
-        case '%':
-          calculator.executeCommand(new CalculateRemainderCommand(this.state.value));
-          break;
-        default:
-          break;
+      try {
+        switch (this.state.commands[this.state.commands.length - 1]) {
+          case '+':
+            calculator.executeCommand(new AddCommand(this.state.value));
+            break;
+          case '-':
+            calculator.executeCommand(new SubtractCommand(this.state.value));
+            break;
+          case '*':
+            calculator.executeCommand(new MultiplyCommand(this.state.value));
+            break;
+          case '/':
+            if (Number(makeCorrectRealNumber(this.state.value)) === 0) {
+              throw new Error("Can't divide by zero");
+            }
+            calculator.executeCommand(new DivideCommand(this.state.value));
+            break;
+          case '%':
+            if (Number(makeCorrectRealNumber(this.state.value)) === 0) {
+              throw new Error("Can't divide by zero");
+            }
+            calculator.executeCommand(new CalculateRemainderCommand(this.state.value));
+            break;
+          default:
+            break;
+        }
+      } catch (err) {
+        this.setState({ value: '', expression: '', commands: [], error: err.message });
+        return;
       }
     }
     this.setState((prevState) => ({
@@ -97,7 +128,7 @@ export default class Calculator extends Component {
 
   handleChangeSign() {
     this.setState((prevState) => ({
-      value: String(-1 * Number(prevState.value)),
+      value: String(-1 * Number(makeCorrectRealNumber(prevState.value))),
     }));
   }
 
@@ -108,7 +139,7 @@ export default class Calculator extends Component {
 
   handleClearExpression() {
     calculator.clearValue();
-    this.setState({ value: '', expression: '' });
+    this.setState({ value: '', expression: '', commands: [], error: null });
   }
 
   handleDeleteSymbol() {
@@ -133,7 +164,7 @@ export default class Calculator extends Component {
     return (
       <Flex justify="center">
         <Flex direction="column">
-          <Display currentValue={this.state.value} expression={this.state.expression} />
+          <Display currentValue={this.state.value} expression={this.state.expression} error={this.state.error} />
           <KeyPad
             onEnter={this.handleEnterSymbol}
             onExecuteCommand={this.handleExecuteCommand}
