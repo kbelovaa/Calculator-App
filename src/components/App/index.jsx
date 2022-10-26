@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Layout from 'Components/Layout';
 import Calculator from 'Components/Calculator';
+import CalculatorFC from 'Components/Calculator/indexFC';
 import Settings from 'Components/Settings';
 import ErrorBoundary from 'Components/ErrorBoundary';
 import Context from 'Utils/context';
@@ -30,6 +31,7 @@ export default class App extends Component {
               <Routes>
                 <Route path="/" element={<Layout />}>
                   <Route index element={<Calculator />} />
+                  <Route path="FC" element={<CalculatorFC />} />
                   <Route path="settings" element={<Settings />} />
                 </Route>
                 <Route path="*" element={<Navigate to="/" />} />

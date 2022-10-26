@@ -175,7 +175,7 @@ export default class Calculator extends Component {
           />
         </Flex>
         <Flex direction="column" justify="end">
-          {this.state.isHistoryOpen && <History history={this.context.onShowHistory} />}
+          {this.state.isHistoryOpen && <History />}
           <ControlPanel
             isHistoryOpen={this.state.isHistoryOpen}
             showHistory={this.handleShowHistory}

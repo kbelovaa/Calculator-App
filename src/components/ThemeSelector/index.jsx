@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import changeThemeAction from 'Store/actions/themeActions';
-import { StyledSelect, StyledOption } from './styled';
+import { StyledSelect } from './styled';
 
 function ThemeSelector() {
   const selectedTheme = useSelector((state) => state.theme.theme);

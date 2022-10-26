@@ -18,7 +18,10 @@ export default class Header extends Component {
           <HeaderTitle selectedtheme={this.context.onGetTheme}>Calculator App</HeaderTitle>
           <Flex>
             <StyledNavLink to="/" selectedtheme={this.context.onGetTheme} end>
-              Home
+              Home(CC)
+            </StyledNavLink>
+            <StyledNavLink to="/FC" selectedtheme={this.context.onGetTheme}>
+              Home(FC)
             </StyledNavLink>
             <StyledNavLink to="/settings" selectedtheme={this.context.onGetTheme}>
               Settings

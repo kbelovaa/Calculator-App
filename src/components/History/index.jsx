@@ -15,7 +15,7 @@ export default class History extends Component {
       <HistoryWrapper selectedTheme={this.context.onGetTheme}>
         <HistoryTitle>History</HistoryTitle>
         <HistoryList selectedTheme={this.context.onGetTheme}>
-          {this.props.history.reverse().map((expression, index) => (
+          {this.context.onShowHistory.map((expression, index) => (
             <HistoryItem key={index}>{expression}</HistoryItem>
           ))}
         </HistoryList>
@@ -25,7 +25,6 @@ export default class History extends Component {
 }
 
 History.propTypes = {
-  history: PropTypes.array,
   theme: PropTypes.object,
   selectedTheme: PropTypes.string,
 };
