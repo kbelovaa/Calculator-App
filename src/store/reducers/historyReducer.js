@@ -7,7 +7,7 @@ const defaultState = {
 const historyReducer = (state = defaultState, action) => {
   switch (action.type) {
     case ADD_EXPRESSION:
-      return { ...state, operationHistory: [...state.operationHistory, action.payload] };
+      return { ...state, operationHistory: [action.payload, ...state.operationHistory] };
     case CLEAR_HISTORY:
       return { ...state, operationHistory: [] };
     default:
