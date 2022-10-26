@@ -8,9 +8,9 @@ function HistoryFC() {
   const history = useSelector((state) => state.history.operationHistory).reverse();
 
   return (
-    <HistoryWrapper selectedTheme={theme}>
+    <HistoryWrapper data-cy="historyWrap" selectedTheme={theme}>
       <HistoryTitle>History</HistoryTitle>
-      <HistoryList selectedTheme={theme}>
+      <HistoryList data-cy="historyList" selectedTheme={theme}>
         {history.map((expression, index) => (
           <HistoryItem key={index}>{expression}</HistoryItem>
         ))}

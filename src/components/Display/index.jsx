@@ -13,8 +13,8 @@ export default class Display extends Component {
   render() {
     return (
       <DisplayWrapper selectedTheme={this.context.onGetTheme}>
-        <ExpressionWrapper>{this.props.error ? '' : this.props.expression}</ExpressionWrapper>
-        <InputWrapper>{this.props.error ?? this.props.currentValue}</InputWrapper>
+        <ExpressionWrapper data-cy="displayExpr">{this.props.error ? '' : this.props.expression}</ExpressionWrapper>
+        <InputWrapper data-cy="displayInput">{this.props.error ?? this.props.currentValue}</InputWrapper>
       </DisplayWrapper>
     );
   }

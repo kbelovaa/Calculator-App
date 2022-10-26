@@ -12,9 +12,9 @@ export default class History extends Component {
 
   render() {
     return (
-      <HistoryWrapper selectedTheme={this.context.onGetTheme}>
+      <HistoryWrapper data-cy="historyWrap" selectedTheme={this.context.onGetTheme}>
         <HistoryTitle>History</HistoryTitle>
-        <HistoryList selectedTheme={this.context.onGetTheme}>
+        <HistoryList data-cy="historyList" selectedTheme={this.context.onGetTheme}>
           {this.context.onShowHistory.map((expression, index) => (
             <HistoryItem key={index}>{expression}</HistoryItem>
           ))}

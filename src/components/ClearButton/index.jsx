@@ -13,7 +13,7 @@ function ClearButton() {
   }
 
   return (
-    <StyledClearButton selectedTheme={selectedTheme} onClick={clearHistory}>
+    <StyledClearButton data-cy="btnClearHist" selectedTheme={selectedTheme} onClick={clearHistory}>
       Clear History
     </StyledClearButton>
   );

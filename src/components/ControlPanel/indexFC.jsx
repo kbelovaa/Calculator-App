@@ -13,10 +13,10 @@ function ControlPanelFC(props) {
 
   return (
     <ControlPanelWrapper selectedTheme={theme}>
-      <StyledControlButton selectedTheme={theme} onClick={props.showHistory}>
+      <StyledControlButton data-cy="btnOpenHist" selectedTheme={theme} onClick={props.showHistory}>
         {props.isHistoryOpen ? 'Hide history' : 'Show history'}
       </StyledControlButton>
-      <StyledControlButton selectedTheme={theme} onClick={clearHistory}>
+      <StyledControlButton data-cy="btnClearAllHist" selectedTheme={theme} onClick={clearHistory}>
         Clear all history
       </StyledControlButton>
     </ControlPanelWrapper>

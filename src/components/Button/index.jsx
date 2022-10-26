@@ -12,7 +12,7 @@ export default class Button extends Component {
 
   render() {
     return (
-      <StyledButton selectedTheme={this.context.onGetTheme} onClick={() => this.props.onClick(this.props.value)}>
+      <StyledButton data-cy={this.props.cy} selectedTheme={this.context.onGetTheme} onClick={() => this.props.onClick(this.props.value)}>
         {this.props.value}
       </StyledButton>
     );
@@ -20,6 +20,7 @@ export default class Button extends Component {
 }
 
 Button.propTypes = {
+  cy: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   onClick: PropTypes.func,
   theme: PropTypes.object,

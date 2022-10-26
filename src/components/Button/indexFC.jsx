@@ -7,13 +7,14 @@ function ButtonFC(props) {
   const theme = useSelector((state) => state.theme.theme);
 
   return (
-    <StyledButton selectedTheme={theme} onClick={() => props.onClick(props.value)}>
+    <StyledButton data-cy={props.cy} selectedTheme={theme} onClick={() => props.onClick(props.value)}>
       {props.value}
     </StyledButton>
   );
 }
 
 ButtonFC.propTypes = {
+  cy: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   onClick: PropTypes.func,
   theme: PropTypes.object,

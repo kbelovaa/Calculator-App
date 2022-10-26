@@ -20,10 +20,10 @@ export default class ControlPanel extends Component {
   render() {
     return (
       <ControlPanelWrapper selectedTheme={this.context.onGetTheme}>
-        <StyledControlButton selectedTheme={this.context.onGetTheme} onClick={this.props.showHistory}>
+        <StyledControlButton data-cy="btnOpenHist" selectedTheme={this.context.onGetTheme} onClick={this.props.showHistory}>
           {this.props.isHistoryOpen ? 'Hide history' : 'Show history'}
         </StyledControlButton>
-        <StyledControlButton selectedTheme={this.context.onGetTheme} onClick={this.clearHistory}>
+        <StyledControlButton data-cy="btnClearAllHist" selectedTheme={this.context.onGetTheme} onClick={this.clearHistory}>
           Clear all history
         </StyledControlButton>
       </ControlPanelWrapper>

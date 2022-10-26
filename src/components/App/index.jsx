@@ -25,7 +25,7 @@ export default class App extends Component {
             onClearExpressions: this.props.onClearExpressions,
           }}
         >
-          <AppWrapper selectedTheme={this.props.onGetTheme}>
+          <AppWrapper data-cy="appWrap" selectedTheme={this.props.onGetTheme}>
             <GlobalStyle />
             <BrowserRouter>
               <Routes>

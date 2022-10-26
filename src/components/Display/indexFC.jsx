@@ -8,8 +8,8 @@ function DisplayFC(props) {
 
   return (
     <DisplayWrapper selectedTheme={theme}>
-      <ExpressionWrapper>{props.error ? '' : props.expression}</ExpressionWrapper>
-      <InputWrapper>{props.error ?? props.currentValue}</InputWrapper>
+      <ExpressionWrapper data-cy="displayExpr">{props.error ? '' : props.expression}</ExpressionWrapper>
+      <InputWrapper data-cy="displayInput">{props.error ?? props.currentValue}</InputWrapper>
     </DisplayWrapper>
   );
 }

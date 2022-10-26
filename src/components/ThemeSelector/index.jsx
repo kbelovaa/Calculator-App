@@ -18,7 +18,7 @@ function ThemeSelector() {
   }
 
   return (
-    <StyledSelect
+    <StyledSelect data-cy="themeSelect"
       selectedTheme={selectedTheme}
       value={selectValue}
       onChange={(event) => changeTheme(event.target.value)}

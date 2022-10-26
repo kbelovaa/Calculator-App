@@ -13,17 +13,17 @@ export default class Header extends Component {
 
   render() {
     return (
-      <HeaderWrapper selectedtheme={this.context.onGetTheme}>
+      <HeaderWrapper data-cy="headerWrap" selectedtheme={this.context.onGetTheme}>
         <Flex justify="space-between">
           <HeaderTitle selectedtheme={this.context.onGetTheme}>Calculator App</HeaderTitle>
           <Flex>
-            <StyledNavLink to="/" selectedtheme={this.context.onGetTheme} end>
+            <StyledNavLink data-cy="linkHomeCC" to="/" selectedtheme={this.context.onGetTheme} end>
               Home(CC)
             </StyledNavLink>
-            <StyledNavLink to="/FC" selectedtheme={this.context.onGetTheme}>
+            <StyledNavLink data-cy="linkHomeFC" to="/FC" selectedtheme={this.context.onGetTheme}>
               Home(FC)
             </StyledNavLink>
-            <StyledNavLink to="/settings" selectedtheme={this.context.onGetTheme}>
+            <StyledNavLink data-cy="linkSettings" to="/settings" selectedtheme={this.context.onGetTheme}>
               Settings
             </StyledNavLink>
           </Flex>
