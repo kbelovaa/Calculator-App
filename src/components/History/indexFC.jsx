@@ -5,7 +5,7 @@ import { HistoryWrapper, HistoryTitle, HistoryList, HistoryItem } from './styled
 
 function HistoryFC() {
   const theme = useSelector((state) => state.theme.theme);
-  const history = useSelector((state) => state.history.operationHistory).reverse();
+  const history = useSelector((state) => state.history.operationHistory);
 
   return (
     <HistoryWrapper data-cy="historyWrap" selectedTheme={theme}>
